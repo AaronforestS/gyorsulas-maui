@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="gyorsulas_maui.MainPage">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <HorizontalStackLayout Grid.Row="0">
+            <Button Text="New game" Command="{Binding NewGameCommand}"/>
+            <Button Text="{Binding PauseButtonText}" Command="{Binding PauseGameCommand}"/>
+            <Button Text="Save game" Command="{Binding SaveGameCommand}" IsEnabled="{Binding IsEnabled}"/>
+            <Button Text="Load game" Command="{Binding LoadGameCommand}" IsEnabled="{Binding IsEnabled}"/>
+        </HorizontalStackLayout>
+
+        <Grid
+            Grid.Row="1"
+            BindableLayout.ItemsSource="{Binding Fields}"
+            RowDefinitions="{Binding Rows}"
+            ColumnDefinitions="{Binding Cols}"
+            ColumnSpacing="4"
+            RowSpacing="4">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Button
+                        Grid.Row="{Binding X}"
+                        Grid.Column="{Binding Y}"
+                        Padding="0"
+                        FontAttributes="Bold"
+                        FontSize="Medium"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand">
+                        <Button.Triggers>
+                            <DataTrigger TargetType="Button" Binding="{Binding BGColor}" Value="0">
+                                <Setter Property="BackgroundColor" Value="White" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Button" Binding="{Binding BGColor}" Value="1">
+                                <Setter Property="BackgroundColor" Value="Green" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Button" Binding="{Binding BGColor}" Value="2">
+                                <Setter Property="BackgroundColor" Value="Red" />
+                            </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
+
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </Grid>
+
+        <HorizontalStackLayout Grid.Row="2" HorizontalOptions="Fill">
+            <Button Text="&lt;" Command="{Binding MoveLeftCommand}" HorizontalOptions="Fill"/>
+            <Button Text=">" Command="{Binding MoveRightCommand}" HorizontalOptions="Fill"/>
+        </HorizontalStackLayout>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Grid.Row="3">
+            <Label Text="Fuel: " />
+            <Label Text="{Binding fuel}" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="End" Grid.Row="3">
+            <Label Text="Time elapsed: " />
+            <Label Text="{Binding gameTime}" />
+        </StackLayout>
+    </Grid>
+    
+</ContentPage>

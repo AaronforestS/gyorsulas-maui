@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="gyorsulas_maui.View.LoadPage"
+             Title="Loading">
+    <ListView ItemsSource="{Binding Storages}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell
+                    Text="{Binding Name}"
+                    Detail="{Binding ModificationDate}"
+                    Command="{Binding LoadGameCommand}"
+                    CommandParameter="{Binding Name}" />
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>
